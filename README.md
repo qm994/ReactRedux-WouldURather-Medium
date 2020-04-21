@@ -28,7 +28,7 @@ Using the provided starter code, you'll build a React/Redux front end for the ap
 
 8. A navigation bar to naviage in the app:
     |--- `Home page`
-    |--- `New Question`
+    |--- `New Questionc`
     |--- `Leader Board`
 
 9. What happened after user votes in a poll:
