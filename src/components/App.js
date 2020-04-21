@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { handleInitialUserData, handleInitialPollData } from '../actions/shared'
+import { handleInitialUserData, handleInitialPollData } from '../actions/shared';
+
 class App extends Component {
   componentDidMount(){
-    console.log(this.props)
+    this.props.dispatch(handleInitialUserData())
+    this.props.dispatch(handleInitialPollData())
   }
   render() {
     return (
@@ -13,4 +15,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);
