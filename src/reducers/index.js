@@ -5,7 +5,7 @@ import authedUser from './authedUser';
 import { combineReducers } from 'redux';
 
 export default combineReducers({
-    users: users,
-    polls: polls,
-    authedUser: authedUser
+    users,
+    polls,
+    authedUser
 })
