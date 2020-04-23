@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
-
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
-
+import { divStyle } from '../utils/helper';
+import { Button, DatePicker, Form } from 'antd';
+import 'antd/dist/antd.css';
 
 class Log extends Component {
-    
+
     handleSubmit = (e) => {
         e.preventDefault();
         const selectedIndex = e.target.select.options.selectedIndex;
         const options = e.target.select.options;
+        console.log(e.target.select.options)
         const newAuthedUserId = options[selectedIndex].value;
 
         this.props.dispatch(setAuthedUser(newAuthedUserId))
@@ -18,6 +19,7 @@ class Log extends Component {
 
     render() {
         const { users, authedUser } = this.props;
+        
         return (
             <div>
                 <div>
@@ -30,12 +32,17 @@ class Log extends Component {
                         <label htmlFor="select"></label>
                         <select id="select">
                             {users.map(user => (
-                                <option value={user.id} key={user.id} defaultValue={user.id === authedUser}>
+                                <option
+                                    key={user.id}
+                                    value={user.id}
+                                    defaultValue={user.id === authedUser}
+                                    style={divStyle(user)}
+                                >
                                     {user.name}
                                 </option>
                             ))}
                         </select>
-                        <button type='submit'>Primary Button</button>
+                        <button type="submit">Primary Button</button>
                     </form>
                 </div>
             </div>

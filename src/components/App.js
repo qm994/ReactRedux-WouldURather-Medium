@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
 import { handleInitialUserData, handleInitialPollData } from '../actions/shared';
-
-
 import Log from './Log'
+import Home from './Home'
+import '../css/App.css'
 
 
 class App extends Component {
@@ -14,7 +13,10 @@ class App extends Component {
   }
   render() {
     return (
-      <Log />
+      <div className="App">
+        <Log />
+        <Home />
+      </div>
     )
   }
 }
