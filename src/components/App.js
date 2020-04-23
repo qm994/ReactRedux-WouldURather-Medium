@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 
 import { handleInitialUserData, handleInitialPollData } from '../actions/shared';
 
+
+import Log from './Log'
+
+
 class App extends Component {
   componentDidMount(){
     this.props.dispatch(handleInitialUserData())
@@ -10,7 +14,7 @@ class App extends Component {
   }
   render() {
     return (
-      <div>App</div>
+      <Log />
     )
   }
 }

@@ -1,5 +1,3 @@
-import { RECEIVE_POLLS } from "./polls";
-
 export const RECEIVE_USERS = "RECEIVE_USERS";
 
 export function receiveUsers(users) {
