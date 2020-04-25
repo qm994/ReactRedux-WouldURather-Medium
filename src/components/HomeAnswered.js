@@ -5,10 +5,10 @@ import { connect } from "react-redux";
 class HomeAnswered extends Component {
     render() {
         const { polls, authedUser } = this.props;
-        console.log(polls[0].id)
+        console.log(polls)
         return (
             <div>
-                Answered Questions
+                An
             </div>
         )
     }

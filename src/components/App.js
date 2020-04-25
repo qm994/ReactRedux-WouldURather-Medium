@@ -4,7 +4,7 @@ import { handleInitialUserData, handleInitialPollData } from '../actions/shared'
 import Log from './Log'
 import Home from './Home'
 import '../css/App.css'
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
   componentDidMount() {
@@ -13,23 +13,25 @@ class App extends Component {
   }
   render() {
     return (
-      <div className="container">
-        {
-          this.props.loading === true
-            ? null
-            : <div className="App">
-              <Log />
-              <Home />
-            </div>
-        }
-      </div>
+      <Router>
+        <div className="container">
+          {
+            this.props.loading === true
+              ? null
+              : <div className="App">
+                <Route path="/" exact component={Log} />
+                <Route path="/questions" component={Home} />
+              </div>
+          }
+        </div>
+      </Router>
     )
   }
 };
 
 function mapStateToProps({ polls }) {
   return {
-    loading: polls == null
+    loading: JSON.stringify(polls) === '{}'
   }
 };
 
