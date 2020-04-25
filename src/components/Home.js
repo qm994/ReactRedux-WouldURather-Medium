@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+
+import HomeAnswered from './HomeAnswered';
+import HomeUnAnswered from './HomeUnswered';
 
 class Home extends Component {
     render() {
         return (
-            <div>Home Component</div>
+            <div>
+                <HomeAnswered />
+                <HomeUnAnswered />  
+            </div>
         )
     }
 };
 
-export default Home;
+export default connect()(Home);

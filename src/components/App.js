@@ -7,18 +7,30 @@ import '../css/App.css'
 
 
 class App extends Component {
-  componentDidMount(){
+  componentDidMount() {
     this.props.dispatch(handleInitialUserData())
     this.props.dispatch(handleInitialPollData())
   }
   render() {
     return (
-      <div className="App">
-        <Log />
-        <Home />
+      <div className="container">
+        {
+          this.props.loading === true
+            ? null
+            : <div className="App">
+              <Log />
+              <Home />
+            </div>
+        }
       </div>
     )
   }
-}
+};
 
-export default connect()(App);
+function mapStateToProps({ polls }) {
+  return {
+    loading: polls == null
+  }
+};
+
+export default connect(mapStateToProps)(App);
