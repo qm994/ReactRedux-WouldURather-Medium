@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
-
 import { connect } from "react-redux";
+import Poll from "./Poll";
 
 class HomeUnAnswered extends Component {
     render() {
-        const { userUnAnswered } = this.props;
-        console.log(userUnAnswered)
+        const { userUnAnswered, users } = this.props;
         return (
             <div>
-                <h3>Unanswered Questions</h3>
+                <h2>Unanswered Questions</h2>
                 <ul>
                     {
                         userUnAnswered.map(poll => (
                             <li key={poll.id}>
-                                {poll.optionOne.text}
+                                <Poll poll={poll} users={users} />
                             </li>
                         ))
                     }
@@ -23,9 +22,10 @@ class HomeUnAnswered extends Component {
     }
 };
 
-function mapStateToProps({authedUser}, props) {
+function mapStateToProps({authedUser, users}, props) {
     const { userUnAnswered } = props;
     return {
+        users,
         userUnAnswered,
         authedUser
     }
