@@ -6,8 +6,7 @@ class HomeUnAnswered extends Component {
     render() {
         const { userUnAnswered, users } = this.props;
         return (
-            <div>
-                <h2>Unanswered Questions</h2>
+            <div className="questions">
                 <ul>
                     {
                         userUnAnswered.map(poll => (

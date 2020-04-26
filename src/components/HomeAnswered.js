@@ -2,16 +2,16 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import Poll from './Poll';
 
+
 class HomeAnswered extends Component {
     render() {
         const { userAnswered, users } = this.props;
         console.log(userAnswered)
         return (
-            <div>
-                <h2>Answered Questions</h2>
+            <div className="questions">
                 <ul>
                     {
-                        userAnswered.map((poll) => (
+                        userAnswered.map(poll => (
                             <li key={poll.id}>
                                 <Poll poll={poll} users={users} />
                             </li>
@@ -23,7 +23,7 @@ class HomeAnswered extends Component {
     }
 };
 
-function mapStateToProps({ authedUser, users}, props) {
+function mapStateToProps({ authedUser, users }, props) {
     const { userAnswered } = props;
     return {
         users,

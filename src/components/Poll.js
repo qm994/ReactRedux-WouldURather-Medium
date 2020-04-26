@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Image from 'react-bootstrap/Image';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import "../css/index.css";
+
 
 class Poll extends Component {
     render() {
@@ -10,13 +15,14 @@ class Poll extends Component {
         const question = poll.optionOne.text;
         return (
             <div>
-                <div className="poll-container">
-                    <h3>{name} asks question:</h3>
-                    <img src={avatar} alt={name} />
-                    <span>{question}</span>
-                    <button>View Poll</button>
-                </div>
+                <Image src={avatar} roundedCircle fluid className="avatar"/>
+                <Card.Body>
+                    <Card.Title>{name}asks question:</Card.Title>
+                    <Card.Text>{question}</Card.Text>
+                    <Button variant="primary">View Question</Button>
+                </Card.Body>
             </div>
+            
         )
     }
 };
