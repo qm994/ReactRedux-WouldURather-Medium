@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
 import { divStyle } from '../utils/helper';
-import { Button, DatePicker, Form } from 'antd';
-import 'antd/dist/antd.css';
 
 class Log extends Component {
 

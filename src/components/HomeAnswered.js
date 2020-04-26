@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-
 import { connect } from "react-redux";
+import Poll from './Poll';
+
 
 class HomeAnswered extends Component {
     render() {
-        const { userAnswered } = this.props;
+        const { userAnswered, users } = this.props;
         console.log(userAnswered)
         return (
-            <div>
-                <h3>Answered Questions</h3>
+            <div className="questions">
                 <ul>
                     {
-                        userAnswered.map((poll) => (
+                        userAnswered.map(poll => (
                             <li key={poll.id}>
-                                {poll.optionOne.text}
+                                <Poll poll={poll} users={users} />
                             </li>
                         ))
                     }
@@ -23,9 +23,10 @@ class HomeAnswered extends Component {
     }
 };
 
-function mapStateToProps({ authedUser }, props) {
+function mapStateToProps({ authedUser, users }, props) {
     const { userAnswered } = props;
     return {
+        users,
         userAnswered,
         authedUser
     }

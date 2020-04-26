@@ -5,13 +5,46 @@ import HomeAnswered from './HomeAnswered';
 import HomeUnAnswered from './HomeUnswered';
 import { getVoters } from '../utils/helper';
 
+import Tab from 'react-bootstrap/Tab';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Nav from 'react-bootstrap/Nav';
+
+
+
 class Home extends Component {
     render() {
         //console.log(this.props.pollValues);
         return (
             <div>
-                <HomeAnswered userAnswered={this.props.userAnswered}/>
-                <HomeUnAnswered userUnAnswered={this.props.userUnAnswered}/>
+                <Tab.Container id="tabs" defaultActiveKey="answered"> 
+                    <Row className="navHomePage">
+                        <Col sm={3} md={6}>
+                            <Nav variant="pills" className="flex-column">
+                                <Nav.Item>
+                                    <Nav.Link eventKey="answered">Answered Questions</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Col>
+                        <Col sm={3} md={6} >
+                            <Nav variant="pills" className="flex-column">
+                                <Nav.Item>
+                                    <Nav.Link eventKey="unanswered">UnAnswered Questions</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Tab.Content>
+                            <Tab.Pane eventKey="answered" className="questions">
+                                <HomeAnswered userAnswered={this.props.userAnswered} />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="unanswered" className="questions">
+                                <HomeUnAnswered userUnAnswered={this.props.userUnAnswered} />
+                            </Tab.Pane>
+                        </Tab.Content>
+                    </Row>
+                </Tab.Container>
             </div>
         )
     }
@@ -29,7 +62,7 @@ function mapStateToProps({ polls, authedUser, users }) {
             isAnswered: currentVoters.includes(authedUser)
         }
     });
-    
+
     return {
         pollsNewProp,
         userAnswered: pollsNewProp.filter(ele => ele.isAnswered === true),
