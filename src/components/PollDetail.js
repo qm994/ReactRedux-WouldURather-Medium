@@ -5,12 +5,16 @@ import { connect } from 'react-redux';
 class PollDetail extends Component {
     render() {
         return (
-            <div>Poll Detail</div>
+        <div><h3>Poll Detail: {this.props.id}</h3></div>
         )
     }
 };
 
 function mapStateToProps({ }, props) {
-    console.log(props)
+    const id = props.match.params.id
+    console.log(props.match.params.id)
+    return {
+        id
+    }
 }
-export default PollDetail;
+export default connect(mapStateToProps)(PollDetail);
