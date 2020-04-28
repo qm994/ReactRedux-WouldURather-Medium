@@ -10,31 +10,42 @@ import Form from 'react-bootstrap/Form';
 
 class PollDetail extends Component {
     state = {
-        checked: false,
+        optionOneChecked: false,
+        optionTwoChecked: false,
         option: ""
     }
 
-    onClick = (event, val) => {
-        // this.setState({
-        //     checked: event.target.checked,
-        //     option: val
-        // })
+    onChangeOne = () => {
+        //e.preventDefault();
+        this.setState({
+            optionOneChecked: !this.state.optionOneChecked,
+            option: !this.state.optionOneChecked ? "optionOne" : ""
+        })
+    };
+
+    onChangeTwo = () => {
+        this.setState(() => ({
+            optionTwoChecked: !this.state.optionTwoChecked,
+            option: !this.state.optionTwoChecked ? "optionTwo" : ""
+        }))
     }
 
-    onSubmit = (event, checkId) => {
+    onSubmit = (event) => {
         event.preventDefault();
-        //const selectedVal = document.querySelector(".checkId:checked").value
-        
+        //const selectedVal = document.querySelector(".checkId:checked").values
         console.log(event.target)
     }
+    
     render() {
+        console.log(this.state.option)
+        console.log(this.state.optionOneChecked)
         const { id, polls, users, authedUser } = this.props;
         const pollInfo = polls[id];
         const authorId = pollInfo.author;
         const authorInfo = users[authorId];
         console.log(authorInfo, polls[id])
         return (
-            <Form onSubmit={(event)=> this.onSubmit(event, pollInfo.id)}>
+            <Form onSubmit={(event) => this.onSubmit(event, pollInfo.id)}>
                 <Image roundedCircle fluid src={authorInfo.avatarURL} className="avatar" />
                 <Card.Body>
                     <Card.Title>{authorInfo.name} asks:</Card.Title>
@@ -46,21 +57,23 @@ class PollDetail extends Component {
                     <ListGroup.Item>
                         <Form.Check
                             type="checkbox"
-                            className={pollInfo.id}
+                            id="optionOne"
                             label={pollInfo.optionOne.text}
-                            value="optionOne"
                             checked={this.state.checked}
-                            onClick={this.onClick(id)}
+                            value="optionOne"
+                            ref={ele => this.myCheck = ele}
+                            onChange={this.onChangeOne}
+
                         />
                     </ListGroup.Item>
                     <ListGroup.Item>
                         <Form.Check
                             type="checkbox"
-                            className={pollInfo.id}
+                            id="optionTwo"
                             label={pollInfo.optionTwo.text}
                             value="optionTwo"
-                            checked={this.state.checked}
-                            onClick={this.onClick(id)}
+                            ref="check"
+                            onChange={this.onChangeTwo}
                         />
                     </ListGroup.Item>
                 </ListGroup>
