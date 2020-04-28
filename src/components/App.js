@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialUserData, handleInitialPollData } from '../actions/shared';
-import Log from './Log'
-import Home from './Home'
-import '../css/App.css'
+import Log from './Log';
+import Home from './Home';
+import PollDetail from './PollDetail';
+import '../css/App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 class App extends Component {
@@ -20,7 +21,8 @@ class App extends Component {
               ? null
               : <div className="App">
                 <Route path="/" exact component={Log} />
-                <Route path="/questions" component={Home} />
+                <Route path="/questions" exact component={Home} />
+                <Route path="/questions/:id" exact component={PollDetail} />
               </div>
           }
         </div>

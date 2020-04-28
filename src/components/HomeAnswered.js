@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import Poll from './Poll';
-
+import { Link, withRouter } from 'react-router-dom';
 
 class HomeAnswered extends Component {
     render() {
@@ -32,4 +32,4 @@ function mapStateToProps({ authedUser, users }, props) {
     }
 }
 
-export default connect(mapStateToProps)(HomeAnswered)
+export default withRouter(connect(mapStateToProps)(HomeAnswered))

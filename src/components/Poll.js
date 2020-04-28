@@ -4,12 +4,17 @@ import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import "../css/index.css";
-
+import { Link, withRouter } from 'react-router-dom';
 
 class Poll extends Component {
+    
+    toQuestion = (e, id) => {
+        e.preventDefault();
+        this.props.history.push(`/questions/${id}`)
+    }
+
     render() {
         const { poll, users } = this.props;
-        console.log(poll, users)
         const avatar = users[poll.author].avatarURL
         const name = users[poll.author].name;
         const question = poll.optionOne.text;
@@ -19,7 +24,11 @@ class Poll extends Component {
                 <Card.Body>
                     <Card.Title>{name}asks question:</Card.Title>
                     <Card.Text>{question}</Card.Text>
-                    <Button variant="primary">View Question</Button>
+                    <Link to={`questions/${poll.id}`}>
+                        <Button variant="primary" onClick={(e, id) => this.toQuestion(e, poll.id)}>
+                            View Question
+                        </Button>
+                    </Link>
                 </Card.Body>
             </div>
             
@@ -27,4 +36,4 @@ class Poll extends Component {
     }
 };
 
-export default Poll;
+export default withRouter(Poll);
