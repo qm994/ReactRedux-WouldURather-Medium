@@ -35,17 +35,22 @@ class PollDetail extends Component {
         //const selectedVal = document.querySelector(".checkId:checked").values
         console.log(event.target)
     }
-    
+
     render() {
         console.log(this.state.option)
         console.log(this.state.optionOneChecked)
+        
         const { id, polls, users, authedUser } = this.props;
+        const userHasAnswered = Object.keys(users[authedUser].answers);
+        console.log(userHasAnswered)
         const pollInfo = polls[id];
         const authorId = pollInfo.author;
         const authorInfo = users[authorId];
         console.log(authorInfo, polls[id])
         return (
-            <Form onSubmit={(event) => this.onSubmit(event, pollInfo.id)}>
+            userHasAnswered.includes(id)
+            ? <div><h2>show the results</h2></div>
+            : <Form onSubmit={(event) => this.onSubmit(event, pollInfo.id)}>
                 <Image roundedCircle fluid src={authorInfo.avatarURL} className="avatar" />
                 <Card.Body>
                     <Card.Title>{authorInfo.name} asks:</Card.Title>
