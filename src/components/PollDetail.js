@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
+
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
+import ProgressBar from 'react-bootstrap/ProgressBar';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
+import Badge from 'react-bootstrap/Badge';
+
+import { getFixedNumber } from '../utils/helper';
 
 class PollDetail extends Component {
     state = {
@@ -39,54 +43,96 @@ class PollDetail extends Component {
     render() {
         console.log(this.state.option)
         console.log(this.state.optionOneChecked)
-        
+
         const { id, polls, users, authedUser } = this.props;
         const userHasAnswered = Object.keys(users[authedUser].answers);
-        console.log(userHasAnswered)
         const pollInfo = polls[id];
         const authorId = pollInfo.author;
         const authorInfo = users[authorId];
+        const optionOneVotes = getFixedNumber(pollInfo.optionOne);
+        const optionTwoVotes = getFixedNumber(pollInfo.optionTwo);
+        const userSelection = userHasAnswered.includes(id) ? authorInfo.answers[id] : null;
+        console.log(optionOneVotes, optionTwoVotes)
         console.log(authorInfo, polls[id])
+        console.log(userSelection)
         return (
             userHasAnswered.includes(id)
-            ? <div><h2>show the results</h2></div>
-            : <Form onSubmit={(event) => this.onSubmit(event, pollInfo.id)}>
-                <Image roundedCircle fluid src={authorInfo.avatarURL} className="avatar" />
-                <Card.Body>
-                    <Card.Title>{authorInfo.name} asks:</Card.Title>
-                    <Card.Subtitle>
-                        Would U Rather...
-                    </Card.Subtitle>
-                </Card.Body>
-                <ListGroup className="list-group-flush">
-                    <ListGroup.Item>
-                        <Form.Check
-                            type="checkbox"
-                            id="optionOne"
-                            label={pollInfo.optionOne.text}
-                            checked={this.state.checked}
-                            value="optionOne"
-                            ref={ele => this.myCheck = ele}
-                            onChange={this.onChangeOne}
+                // show the answered questions: result
+                ? <Form>
+                    <Image roundedCircle fluid src={authorInfo.avatarURL} className="avatar" />
+                    <Card.Body>
+                        <Card.Title>Asked by {authorInfo.name}</Card.Title>
+                        <Card.Subtitle>
+                            <h3>Results:</h3>
+                        </Card.Subtitle>
+                        {
+                            userSelection === "optionOne"
+                            ? <div>
+                            <Card.Text>
+                                <strong>{pollInfo.optionOne.text}</strong>
+                                <Badge pill variant="success">Your Vote!</Badge>
+                            </Card.Text>
+                            <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
+                            <Card.Text>
+                                <strong>{pollInfo.optionTwo.text}</strong>
+                            </Card.Text>
+                            <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                            </div>
 
-                        />
-                    </ListGroup.Item>
-                    <ListGroup.Item>
-                        <Form.Check
-                            type="checkbox"
-                            id="optionTwo"
-                            label={pollInfo.optionTwo.text}
-                            value="optionTwo"
-                            ref="check"
-                            onChange={this.onChangeTwo}
-                        />
-                    </ListGroup.Item>
-                </ListGroup>
-                <br />
-                <Button variant="primary" type="submit">
-                    Submit
+                            : <div>
+                            <Card.Text>
+                                <strong>{pollInfo.optionOne.text}</strong>
+                            </Card.Text>
+                            <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
+                            <Card.Text>
+                                <strong>{pollInfo.optionTwo.text}</strong>
+                                <Badge pill variant="success">Your Vote!</Badge>
+                            </Card.Text>
+                            <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                            </div>
+                        }
+                        
+
+                    </Card.Body>
+                </Form>
+                // show the unanswered questions: make selection
+                : <Form onSubmit={(event) => this.onSubmit(event, pollInfo.id)}>
+                    <Image roundedCircle fluid src={authorInfo.avatarURL} className="avatar" />
+                    <Card.Body>
+                        <Card.Title>{authorInfo.name} asks:</Card.Title>
+                        <Card.Subtitle>
+                            Would U Rather...
+                    </Card.Subtitle>
+                    </Card.Body>
+                    <ListGroup className="list-group-flush">
+                        <ListGroup.Item>
+                            <Form.Check
+                                type="checkbox"
+                                id="optionOne"
+                                label={pollInfo.optionOne.text}
+                                checked={this.state.checked}
+                                value="optionOne"
+                                ref={ele => this.myCheck = ele}
+                                onChange={this.onChangeOne}
+
+                            />
+                        </ListGroup.Item>
+                        <ListGroup.Item>
+                            <Form.Check
+                                type="checkbox"
+                                id="optionTwo"
+                                label={pollInfo.optionTwo.text}
+                                value="optionTwo"
+                                ref="check"
+                                onChange={this.onChangeTwo}
+                            />
+                        </ListGroup.Item>
+                    </ListGroup>
+                    <br />
+                    <Button variant="primary" type="submit">
+                        Submit
                 </Button>
-            </Form>
+                </Form>
         )
     }
 };
