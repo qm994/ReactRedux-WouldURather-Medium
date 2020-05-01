@@ -1,5 +1,5 @@
 import { receivePolls, savePollAnswer } from './polls';
-import { receiveUsers } from './users';
+import { receiveUsers, saveUserAnswer } from './users';
 import { setAuthedUser } from './authedUser';
 import { _getUsers, _getQuestions, _saveQuestionAnswer } from '../utils/_DATA';
 
@@ -32,6 +32,7 @@ export function handleAddAnswer(answer) {
         return _saveQuestionAnswer(answer)
             .then(() => {
                 dispatch(savePollAnswer(answer))
+                dispatch(saveUserAnswer(answer))
             })
     }
 };

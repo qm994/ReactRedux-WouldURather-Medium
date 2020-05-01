@@ -22,14 +22,6 @@ export default function polls(state = {}, action) {
                 }
             })
             return {
-                // ...state.users,
-                // id: {
-                //     ...state.users.id,
-                //     answers: {
-                //         ...state.users.id.answers,
-                //         [qid]: answer
-                //     }
-                // },
                 ...state,
                 [qid]: {
                     ...state[qid],
