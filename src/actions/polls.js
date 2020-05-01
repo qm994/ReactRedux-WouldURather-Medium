@@ -1,6 +1,6 @@
 export const RECEIVE_POLLS = "RECEIVE_POLLS";
 export const ADD_POLL = "ADD_POLL";
-
+export const SAVE_ANSWER = "SAVE_ANSWER";
 
 export function receivePolls(polls) {
     return {
@@ -13,6 +13,13 @@ export function addPolls(poll) {
     return {
         type: ADD_POLL,
         poll
+    }
+}
+
+export function savePollAnswer(answer) {
+    return {
+        type: SAVE_ANSWER,
+        answer
     }
 }
 
