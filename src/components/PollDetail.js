@@ -48,7 +48,6 @@ class PollDetail extends Component {
                 qid: this.props.id,
                 answer: this.state.option
             };
-            console.log(saveData)
             this.props.dispatch(handleAddAnswer(saveData))
         }
     }
