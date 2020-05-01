@@ -1,7 +1,7 @@
-import { receivePolls } from './polls';
+import { receivePolls, savePollAnswer } from './polls';
 import { receiveUsers } from './users';
 import { setAuthedUser } from './authedUser';
-import { _getUsers, _getQuestions } from '../utils/_DATA';
+import { _getUsers, _getQuestions, _saveQuestionAnswer } from '../utils/_DATA';
 
 const DEFAULT_AUTHED_ID = "sarahedo";
 
@@ -25,4 +25,13 @@ export function handleInitialPollData() {
                 dispatch(receivePolls(polls))
             })
     }
-}
+};
+
+export function handleAddAnswer(answer) {
+    return (dispatch) => {
+        return _saveQuestionAnswer(answer)
+            .then((answer) => {
+                dispatch(savePollAnswer(answer))
+            })
+    }
+};

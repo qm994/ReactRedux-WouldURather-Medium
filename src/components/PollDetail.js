@@ -9,8 +9,11 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import Popover from 'react-bootstrap/Popover';
 
 import { getFixedNumber } from '../utils/helper';
+import { handleAddAnswer } from '../actions/shared';
 
 class PollDetail extends Component {
     state = {
@@ -36,13 +39,25 @@ class PollDetail extends Component {
 
     onSubmit = (event) => {
         event.preventDefault();
-        //const selectedVal = document.querySelector(".checkId:checked").values
-        console.log(event.target)
+        if (this.state.optionOne === 'false' && this.state.optionTwo === 'false') {
+            alert("Please make one choice!")
+        } else {
+            const userSelection = this.state.optionOne ? "optionOne" : "optionTwo";
+            const saveData = {
+                authedUser: this.props.authedUser,
+                qid: this.props.id,
+                answer: this.state.option
+            };
+            console.log(saveData)
+            this.props.dispatch(handleAddAnswer(saveData))
+        }
     }
 
     render() {
+        console.log(this.props)
         console.log(this.state.option)
         console.log(this.state.optionOneChecked)
+        console.log(this.state.optionTwoChecked)
 
         const { id, polls, users, authedUser } = this.props;
         const userHasAnswered = Object.keys(users[authedUser].answers);
@@ -67,31 +82,31 @@ class PollDetail extends Component {
                         </Card.Subtitle>
                         {
                             userSelection === "optionOne"
-                            ? <div>
-                            <Card.Text>
-                                <strong>{pollInfo.optionOne.text}</strong>
-                                <Badge pill variant="success">Your Vote!</Badge>
-                            </Card.Text>
-                            <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
-                            <Card.Text>
-                                <strong>{pollInfo.optionTwo.text}</strong>
-                            </Card.Text>
-                            <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
-                            </div>
+                                ? <div>
+                                    <Card.Text>
+                                        <strong>{pollInfo.optionOne.text}</strong>
+                                        <Badge pill variant="success">Your Vote!</Badge>
+                                    </Card.Text>
+                                    <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
+                                    <Card.Text>
+                                        <strong>{pollInfo.optionTwo.text}</strong>
+                                    </Card.Text>
+                                    <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                                </div>
 
-                            : <div>
-                            <Card.Text>
-                                <strong>{pollInfo.optionOne.text}</strong>
-                            </Card.Text>
-                            <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
-                            <Card.Text>
-                                <strong>{pollInfo.optionTwo.text}</strong>
-                                <Badge pill variant="success">Your Vote!</Badge>
-                            </Card.Text>
-                            <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
-                            </div>
+                                : <div>
+                                    <Card.Text>
+                                        <strong>{pollInfo.optionOne.text}</strong>
+                                    </Card.Text>
+                                    <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
+                                    <Card.Text>
+                                        <strong>{pollInfo.optionTwo.text}</strong>
+                                        <Badge pill variant="success">Your Vote!</Badge>
+                                    </Card.Text>
+                                    <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                                </div>
                         }
-                        
+
 
                     </Card.Body>
                 </Form>
@@ -129,9 +144,8 @@ class PollDetail extends Component {
                         </ListGroup.Item>
                     </ListGroup>
                     <br />
-                    <Button variant="primary" type="submit">
-                        Submit
-                </Button>
+                        
+                    <Button variant="success" type="submit" onSubmit={this.onSubmit}>Submit</Button>
                 </Form>
         )
     }
