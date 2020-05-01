@@ -30,7 +30,7 @@ export function handleInitialPollData() {
 export function handleAddAnswer(answer) {
     return (dispatch) => {
         return _saveQuestionAnswer(answer)
-            .then((answer) => {
+            .then(() => {
                 dispatch(savePollAnswer(answer))
             })
     }
