@@ -20,3 +20,10 @@
   align-items: center;
   height: 100%;
 };
+
+.leader {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
