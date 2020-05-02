@@ -9,10 +9,10 @@ export function receivePolls(polls) {
     }
 }
 
-export function addPolls(poll) {
+export function addNewPoll(newPoll) {
     return {
         type: ADD_POLL,
-        poll
+        newPoll
     }
 }
 
