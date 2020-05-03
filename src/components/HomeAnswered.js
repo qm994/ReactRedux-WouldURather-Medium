@@ -24,7 +24,7 @@ class HomeAnswered extends Component {
 };
 
 function mapStateToProps({ authedUser, users }, props) {
-    const { userAnswered } = props;
+    const userAnswered = props.userAnswered.sort((a,b) => b.timestamp - a.timestamp)
     return {
         users,
         userAnswered,
