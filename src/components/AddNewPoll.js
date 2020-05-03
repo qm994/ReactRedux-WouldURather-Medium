@@ -3,9 +3,12 @@ import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { handleAddNewPoll } from '../actions/shared';
+import { Redirect } from 'react-router-dom';
 
 class AddNewPoll extends Component {
-
+    state = {
+        toHome: false
+    };
     onSubmit = (event) => {
         event.preventDefault();
         const optionOneText = this.optionOne.value;
@@ -17,8 +20,14 @@ class AddNewPoll extends Component {
             optionTwoText
         };
         this.props.dispatch(handleAddNewPoll(newQuestion))
+        this.setState(() => ({
+            toHome: true
+        }))
     };
     render() {
+        if(this.state.toHome) {
+            return <Redirect to="/" /> 
+        }
         return (
             <Form onSubmit={this.onSubmit}>
                 <Form.Group>

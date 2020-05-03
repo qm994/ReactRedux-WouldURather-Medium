@@ -27,10 +27,10 @@ class App extends Component {
               ? null
               : 
               <div className="App">
-                <Route path="/" exact component={Log} />
-                <Route path="/questions" exact component={Home} />
+                <Route path="/log" exact component={Log} />
+                <Route path="/" exact component={Home} />
                 <Route path="/questions/:id" exact component={PollDetail} />
-                <Route path="/leaderBoard" exact component={LeaderBoard} />
+                <Route path="/leaderboard" exact component={LeaderBoard} />
                 <Route path="/add" exact component={AddNewPoll} />
               </div>
           }
