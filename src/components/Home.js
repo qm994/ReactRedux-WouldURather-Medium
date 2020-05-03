@@ -19,13 +19,6 @@ class Home extends Component {
             <div>
                 <Tab.Container id="tabs" defaultActiveKey="answered"> 
                     <Row className="navHomePage">
-                        <Col sm={3} md={6}>
-                            <Nav variant="pills" className="flex-column">
-                                <Nav.Item>
-                                    <Nav.Link eventKey="answered">Answered Questions</Nav.Link>
-                                </Nav.Item>
-                            </Nav>
-                        </Col>
                         <Col sm={3} md={6} >
                             <Nav variant="pills" className="flex-column">
                                 <Nav.Item>
@@ -33,14 +26,21 @@ class Home extends Component {
                                 </Nav.Item>
                             </Nav>
                         </Col>
+                        <Col sm={3} md={6}>
+                            <Nav variant="pills" className="flex-column">
+                                <Nav.Item>
+                                    <Nav.Link eventKey="answered">Answered Questions</Nav.Link>
+                                </Nav.Item>
+                            </Nav>
+                        </Col>
                     </Row>
                     <Row>
                         <Tab.Content>
-                            <Tab.Pane eventKey="answered" className="questions">
-                                <HomeAnswered userAnswered={this.props.userAnswered} />
-                            </Tab.Pane>
                             <Tab.Pane eventKey="unanswered" className="questions">
                                 <HomeUnAnswered userUnAnswered={this.props.userUnAnswered} />
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="answered" className="questions">
+                                <HomeAnswered userAnswered={this.props.userAnswered} />
                             </Tab.Pane>
                         </Tab.Content>
                     </Row>

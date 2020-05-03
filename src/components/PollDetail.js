@@ -63,7 +63,7 @@ class PollDetail extends Component {
         const userSelection = userHasAnswered.includes(id) ? authorInfo.answers[id] : null;
         console.log(optionOneVotes, optionTwoVotes)
         console.log(authorInfo, polls[id])
-        console.log(userSelection)
+        console.log(pollInfo.optionOne)
         return (
             userHasAnswered.includes(id)
                 // show the answered questions: result
@@ -77,15 +77,22 @@ class PollDetail extends Component {
                         {
                             userSelection === "optionOne"
                                 ? <div>
-                                    <Card.Text>
-                                        <strong>{pollInfo.optionOne.text}</strong>
-                                        <Badge pill variant="success">Your Vote!</Badge>
-                                    </Card.Text>
-                                    <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
-                                    <Card.Text>
-                                        <strong>{pollInfo.optionTwo.text}</strong>
-                                    </Card.Text>
-                                    <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                                    <div>
+                                        <Card.Text>
+                                            <strong>{pollInfo.optionOne.text}</strong>
+                                            <Badge pill variant="success">Your Vote!</Badge>
+                                        </Card.Text>
+                                        <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
+                                        <Card.Header as="h5">{pollInfo.optionOne.votes.length} out of 3 votes</Card.Header>
+                                    </div>
+                                    <br/>
+                                    <div>
+                                        <Card.Text>
+                                            <strong>{pollInfo.optionTwo.text}</strong>
+                                        </Card.Text>
+                                        <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                                        <Card.Header as="h5">{pollInfo.optionTwo.votes.length} out of 3 votes</Card.Header>
+                                    </div>
                                 </div>
 
                                 : <div>
@@ -138,7 +145,7 @@ class PollDetail extends Component {
                         </ListGroup.Item>
                     </ListGroup>
                     <br />
-                        
+
                     <Button variant="success" type="submit" onSubmit={this.onSubmit}>Submit</Button>
                 </Form>
         )

@@ -22,7 +22,7 @@ class HomeUnAnswered extends Component {
 };
 
 function mapStateToProps({authedUser, users}, props) {
-    const { userUnAnswered } = props;
+    const userUnAnswered = props.userUnAnswered.sort((a,b) => b.timestamp - a.timestamp)
     return {
         users,
         userUnAnswered,
