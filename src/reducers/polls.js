@@ -8,15 +8,14 @@ export default function polls(state = {}, action) {
                 ...action.polls
             };
         case ADD_POLL:
-            const {id, author, optionOne, optionTwo, timestamp } = action.newPoll;
             return {
                 ...state,
-                [id]: {
-                    [id]: id,
-                    [author]: author,
-                    [optionOne]: optionOne,
-                    [optionTwo]: optionTwo,
-                    [timestamp]: timestamp
+                [action.newPoll.id]: {
+                    id: action.newPoll.id,
+                    author: action.newPoll.author,
+                    optionOne: action.newPoll.optionOne,
+                    optionTwo: action.newPoll.optionTwo,
+                    timestamp: action.newPoll.timestamp
                 }
             };
         case SAVE_ANSWER:

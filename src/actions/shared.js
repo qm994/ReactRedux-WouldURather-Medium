@@ -41,6 +41,7 @@ export function handleAddNewPoll(newPoll) {
     return (dispatch) => {
         return _saveQuestion(newPoll)
             .then((newPoll) => {
+                console.log(newPoll)
                 dispatch(addNewPoll(newPoll))
                 dispatch(addNewPollUser(newPoll))
             })

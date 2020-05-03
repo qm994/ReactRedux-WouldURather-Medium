@@ -10,6 +10,7 @@ export default function users(state = {}, action) {
 
         case SAVE_USER_ANSWER:
             const { authedUser, qid, answer } = action.answer;
+            console.log(state)
              return {
                 ...state,
                 [authedUser]:{
@@ -22,11 +23,13 @@ export default function users(state = {}, action) {
             };
         case ADD_POLL_USER:
           const {id, author, optionOne, optionTwo, timestamp } = action.newPoll;
+          console.log(action)
           return {
             ...state,
             [author]: {
               ...state[author],
-              questions: state[author][questions].concat(id)
+              questions: [...state[author].questions, id] 
+              //state[author].questions.concat([id])
             }
           }
         default :
