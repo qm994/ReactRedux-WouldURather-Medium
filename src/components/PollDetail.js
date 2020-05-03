@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactDOM from 'react-dom';
+import { Redirect } from 'react-router-dom';
 
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -55,15 +56,20 @@ class PollDetail extends Component {
     render() {
         const { id, polls, users, authedUser } = this.props;
         const userHasAnswered = Object.keys(users[authedUser].answers);
+        if(polls[id] === undefined) {
+            return(
+                <Redirect to="/404" />
+            )
+        }
+        console.log(polls[id])
         const pollInfo = polls[id];
         const authorId = pollInfo.author;
         const authorInfo = users[authorId];
         const optionOneVotes = getFixedNumber(pollInfo.optionOne);
         const optionTwoVotes = getFixedNumber(pollInfo.optionTwo);
         const userSelection = userHasAnswered.includes(id) ? authorInfo.answers[id] : null;
-        console.log(optionOneVotes, optionTwoVotes)
-        console.log(authorInfo, polls[id])
-        console.log(pollInfo.optionOne)
+
+        
         return (
             userHasAnswered.includes(id)
                 // show the answered questions: result
