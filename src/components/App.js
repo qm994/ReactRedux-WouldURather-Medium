@@ -7,6 +7,7 @@ import Home from './Home';
 import PollDetail from './PollDetail';
 import LeaderBoard from './LeaderBoard';
 import Nav from './Nav';
+import AddNewPoll  from './AddNewPoll';
 
 import '../css/App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -26,10 +27,11 @@ class App extends Component {
               ? null
               : 
               <div className="App">
-                <Route path="/" exact component={Log} />
-                <Route path="/questions" exact component={Home} />
+                <Route path="/log" exact component={Log} />
+                <Route path="/" exact component={Home} />
                 <Route path="/questions/:id" exact component={PollDetail} />
-                <Route path="/leaderBoard" exact component={LeaderBoard} />
+                <Route path="/leaderboard" exact component={LeaderBoard} />
+                <Route path="/add" exact component={AddNewPoll} />
               </div>
           }
         </div>

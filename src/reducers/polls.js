@@ -7,20 +7,19 @@ export default function polls(state = {}, action) {
                 ...state,
                 ...action.polls
             };
-        case SAVE_ANSWER:
-
-            const { authedUser, qid, answer } = action.answer;
-
-            console.log({
+        case ADD_POLL:
+            return {
                 ...state,
-                [qid]: {
-                    ...state[qid],
-                    [answer]: {
-                        ...state[qid][answer],
-                        votes: state[qid][answer].votes.concat([authedUser])
-                    }
+                [action.newPoll.id]: {
+                    id: action.newPoll.id,
+                    author: action.newPoll.author,
+                    optionOne: action.newPoll.optionOne,
+                    optionTwo: action.newPoll.optionTwo,
+                    timestamp: action.newPoll.timestamp
                 }
-            })
+            };
+        case SAVE_ANSWER:
+            const { authedUser, qid, answer } = action.answer;
             return {
                 ...state,
                 [qid]: {

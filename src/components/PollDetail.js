@@ -53,11 +53,6 @@ class PollDetail extends Component {
     }
 
     render() {
-        console.log(this.props)
-        console.log(this.state.option)
-        console.log(this.state.optionOneChecked)
-        console.log(this.state.optionTwoChecked)
-
         const { id, polls, users, authedUser } = this.props;
         const userHasAnswered = Object.keys(users[authedUser].answers);
         const pollInfo = polls[id];
