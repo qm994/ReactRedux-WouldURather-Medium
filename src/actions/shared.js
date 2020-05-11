@@ -5,6 +5,12 @@ import { _getUsers, _getQuestions, _saveQuestionAnswer, _saveQuestion } from '..
 
 const DEFAULT_AUTHED_ID = "sarahedo";
 
+export function handleSetAutheduser(userId) {
+    return (dispatch) => {
+        dispatch(setAuthedUser(userId))
+    }
+}
+
 export function handleInitialUserData() {
     return (dispatch) => {
         return _getUsers()
