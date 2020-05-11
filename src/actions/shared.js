@@ -3,20 +3,14 @@ import { receiveUsers, saveUserAnswer, addNewPollUser } from './users';
 import { setAuthedUser } from './authedUser';
 import { _getUsers, _getQuestions, _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA';
 
-const DEFAULT_AUTHED_ID = "sarahedo";
-
-export function handleSetAutheduser(userId) {
-    return (dispatch) => {
-        dispatch(setAuthedUser(userId))
-    }
-}
+// const DEFAULT_AUTHED_ID = "sarahedo";
 
 export function handleInitialUserData() {
     return (dispatch) => {
         return _getUsers()
             .then((users) => {
                 dispatch(receiveUsers(users))
-                dispatch(setAuthedUser(DEFAULT_AUTHED_ID))
+                //dispatch(setAuthedUser(DEFAULT_AUTHED_ID))
             })
     }   
 };

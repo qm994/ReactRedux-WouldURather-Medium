@@ -9,12 +9,18 @@ import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
+import { Redirect } from 'react-router-dom';
 
 
 
 class Home extends Component {
     render() {
-        //console.log(this.props.pollValues);
+        console.log(this.props.authedUser)
+        if(this.props.authedUser === null){
+            return (
+                <Redirect to='/log'></Redirect>
+            )
+        }
         return (
             <div>
                 <Tab.Container id="tabs" defaultActiveKey="unanswered"> 
@@ -64,9 +70,9 @@ function mapStateToProps({ polls, authedUser, users }) {
     });
 
     return {
-        pollsNewProp,
         userAnswered: pollsNewProp.filter(ele => ele.isAnswered === true),
-        userUnAnswered: pollsNewProp.filter(ele => ele.isAnswered === false)
+        userUnAnswered: pollsNewProp.filter(ele => ele.isAnswered === false),
+        authedUser
     }
 }
 

@@ -13,6 +13,16 @@ import ErrorPage from './ErrorPage';
 import '../css/App.css';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
+const PrivateRoute = ({component: Component, ...rest}, authedUser) => {
+  return(
+      <Route {...rest} render={(props) => (
+          authedUser !== null
+          ? <Component {...props} />
+          : <Redirect to='/log' />
+      )} />
+  )
+}
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialUserData())
