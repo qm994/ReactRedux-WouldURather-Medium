@@ -11,7 +11,7 @@ import AddNewPoll  from './AddNewPoll';
 import ErrorPage from './ErrorPage';
 
 import '../css/App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
 class App extends Component {
   componentDidMount() {
@@ -19,6 +19,7 @@ class App extends Component {
     this.props.dispatch(handleInitialPollData())
   }
   render() {
+    const { authedUser } = this.props;
     return (
       <Router>
         <div className="container">
@@ -42,7 +43,8 @@ class App extends Component {
   }
 };
 
-function mapStateToProps({ polls }) {
+function mapStateToProps({ polls, authedUser }) {
+  console.log(authedUser)
   return {
     loading: JSON.stringify(polls) === '{}'
   }

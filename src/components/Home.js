@@ -17,7 +17,7 @@ class Home extends Component {
         //console.log(this.props.pollValues);
         return (
             <div>
-                <Tab.Container id="tabs" defaultActiveKey="answered"> 
+                <Tab.Container id="tabs" defaultActiveKey="unanswered"> 
                     <Row className="navHomePage">
                         <Col sm={3} md={6} >
                             <Nav variant="pills" className="flex-column">
