@@ -28,11 +28,6 @@ class AddNewPoll extends Component {
         if(this.state.toHome) {
             return <Redirect to="/" /> 
         };
-        if(this.props.authedUser === null){
-            return (
-                <Redirect to='/log'></Redirect>
-            )
-        };
         return (
             <Form onSubmit={this.onSubmit}>
                 <Form.Group>

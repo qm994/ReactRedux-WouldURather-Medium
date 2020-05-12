@@ -61,20 +61,12 @@ class PollDetail extends Component {
                 <Redirect to="/404" />
             )
         };
-        if(this.props.authedUser === null){
-            return (
-                <Redirect to='/log'></Redirect>
-            )
-        };
-        console.log(polls[id])
         const pollInfo = polls[id];
         const authorId = pollInfo.author;
         const authorInfo = users[authorId];
         const optionOneVotes = getFixedNumber(pollInfo.optionOne);
         const optionTwoVotes = getFixedNumber(pollInfo.optionTwo);
         const userSelection = userHasAnswered.includes(id) ? authorInfo.answers[id] : null;
-
-        
         return (
             userHasAnswered.includes(id)
                 // show the answered questions: result

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { handleInitialUserData, handleInitialPollData } from '../actions/shared';
-
+import { fakeAuth, PrivateRoute } from './Log';
 import Log from './Log';
 import Home from './Home';
 import PollDetail from './PollDetail';
@@ -9,9 +9,11 @@ import LeaderBoard from './LeaderBoard';
 import Nav from './Nav';
 import AddNewPoll  from './AddNewPoll';
 import ErrorPage from './ErrorPage';
+import AuthButton from './LogOut';
 
 import '../css/App.css';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
 
 
 class App extends Component {
@@ -28,7 +30,8 @@ class App extends Component {
     return (
       <Router>
         <div className="container">
-          <Nav />
+          <AuthButton /> 
+          <Nav authedUser={authedUser} dispatch={this.props.dispatch} />
           {
             this.props.loading === true
               ? null
@@ -36,10 +39,10 @@ class App extends Component {
               <div className="App">
                 <Route path="/log" exact component={Log} />
                 
-                <Route path="/" exact component={Home} />
-                <Route path="/questions/:id" exact component={PollDetail} />
-                <Route path="/leaderboard" exact component={LeaderBoard} />
-                <Route path="/add" exact component={AddNewPoll} />
+                <PrivateRoute path="/" exact component={Home} />
+                <PrivateRoute path="/questions/:id" exact component={PollDetail} />
+                <PrivateRoute path="/leaderboard" component={LeaderBoard} />
+                <PrivateRoute path="/add" exact component={AddNewPoll} />
                 <Route path="/404" exact component={ErrorPage}/>
               </div>
           }
@@ -49,9 +52,11 @@ class App extends Component {
   }
 };
 
-function mapStateToProps({ polls, authedUser }) {
+function mapStateToProps({ polls, authedUser, dispatch }) {
   console.log(authedUser)
   return {
+    authedUser,
+    dispatch,
     loading: JSON.stringify(polls) === '{}'
   }
 };

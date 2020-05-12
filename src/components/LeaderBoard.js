@@ -12,11 +12,11 @@ class LeaderBoard extends Component {
 
     render() {
         console.log(this.props.leaderData)
-        if(this.props.authedUser === null){
-            return (
-                <Redirect to='/log'></Redirect>
-            )
-        }
+        // if(this.props.authedUser === null){
+        //     return (
+        //         <Redirect to='/log'></Redirect>
+        //     )
+        // }
         return (
             <div>
                 {this.props.leaderData

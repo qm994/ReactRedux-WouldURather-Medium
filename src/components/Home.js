@@ -15,11 +15,11 @@ import { Redirect } from 'react-router-dom';
 
 class Home extends Component {
     render() {
-        if(this.props.authedUser === null){
-            return (
-                <Redirect to='/log'></Redirect>
-            )
-        }
+        // if(this.props.authedUser === null){
+        //     return (
+        //         <Redirect to='/log'></Redirect>
+        //     )
+        // }
         return (
             <div>
                 <Tab.Container id="tabs" defaultActiveKey="unanswered"> 

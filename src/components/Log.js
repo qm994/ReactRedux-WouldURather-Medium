@@ -4,25 +4,68 @@ import { setAuthedUser } from '../actions/authedUser';
 import { divStyle } from '../utils/helper';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
+
+export const fakeAuth = {
+    isAuthenticated: false,
+    authenticate(cb) {
+      this.isAuthenticated = true
+      setTimeout(cb, 100) // fake async
+    },
+    signout(cb) {
+      this.isAuthenticated = false
+      setTimeout(cb, 100) // fake async
+    }
+}
+  
+
+export const PrivateRoute = ({component: Component, ...rest}) => (
+    <Route {...rest} render={(props) => (
+      fakeAuth.isAuthenticated === true
+      ? <Component {...props} />
+      : <Redirect to={{
+          pathname: '/log',
+          // the current route path the user is trying to access
+          state: {from: props.location}
+      }} 
+      />
+    )} />
+  );
 
 class Log extends Component {
+    state = {
+        redirectToReferrer: false
+    };
+
+    login = () => {
+        fakeAuth.authenticate(() => {
+          this.setState(() => ({
+            redirectToReferrer: true
+          }))
+        })
+    };
     handleSubmit = (e) => {
         e.preventDefault();
-        // const allOptions = document.querySelectorAll('.custom-select.custom-select')[0].options;
-        // const selectedIndex = allOptions.selectedIndex;
-        // const id = allOptions[selectedIndex].value;
-        // console.log(id)
         this.props.dispatch(setAuthedUser(null))
     };
 
     onChange = (e, authedUser) => {
         e.preventDefault();
         this.props.dispatch(setAuthedUser(this.username.value))
-    }
+    };
 
     render() {
-        const { users } = this.props;
-        
+        const { users, authedUser } = this.props;
+        const { redirectToReferrer } = this.state;
+        const { from } = this.props.location.state || { from: { pathname: '/' } };
+        //console.log(this.props)
+        if(authedUser !== null) {
+            this.login();
+        };
+        if (redirectToReferrer === true) {
+            return <Redirect to={from} />
+        };
         return (
             <Form onSubmit={this.handleSubmit}>
                 <Form.Group>
@@ -52,7 +95,6 @@ class Log extends Component {
                         }
                     </Form.Control>
                 </Form.Group>
-                <Button type='submit'>Log Out</Button>
             </Form>
         )
     }
