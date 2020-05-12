@@ -6,7 +6,7 @@ import Figure from 'react-bootstrap/Figure';
 import FigureImage from 'react-bootstrap/FigureImage';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-
+import { Redirect } from 'react-router-dom';
 import "../css/index.css";
 class LeaderBoard extends Component {
 
