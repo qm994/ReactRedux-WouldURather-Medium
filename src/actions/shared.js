@@ -10,7 +10,6 @@ export function handleInitialUserData() {
         return _getUsers()
             .then((users) => {
                 dispatch(receiveUsers(users))
-                //dispatch(setAuthedUser(DEFAULT_AUTHED_ID))
             })
     }   
 };

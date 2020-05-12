@@ -13,21 +13,16 @@ import ErrorPage from './ErrorPage';
 import '../css/App.css';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 
-const PrivateRoute = ({component: Component, ...rest}, authedUser) => {
-  return(
-      <Route {...rest} render={(props) => (
-          authedUser !== null
-          ? <Component {...props} />
-          : <Redirect to='/log' />
-      )} />
-  )
-}
 
 class App extends Component {
+  state = {
+    user: this.props.authedUser
+  }
   componentDidMount() {
     this.props.dispatch(handleInitialUserData())
     this.props.dispatch(handleInitialPollData())
   }
+
   render() {
     const { authedUser } = this.props;
     return (
@@ -40,6 +35,7 @@ class App extends Component {
               : 
               <div className="App">
                 <Route path="/log" exact component={Log} />
+                
                 <Route path="/" exact component={Home} />
                 <Route path="/questions/:id" exact component={PollDetail} />
                 <Route path="/leaderboard" exact component={LeaderBoard} />

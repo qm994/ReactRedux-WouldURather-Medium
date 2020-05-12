@@ -60,7 +60,12 @@ class PollDetail extends Component {
             return(
                 <Redirect to="/404" />
             )
-        }
+        };
+        if(this.props.authedUser === null){
+            return (
+                <Redirect to='/log'></Redirect>
+            )
+        };
         console.log(polls[id])
         const pollInfo = polls[id];
         const authorId = pollInfo.author;

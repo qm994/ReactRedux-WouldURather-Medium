@@ -15,7 +15,6 @@ import { Redirect } from 'react-router-dom';
 
 class Home extends Component {
     render() {
-        console.log(this.props.authedUser)
         if(this.props.authedUser === null){
             return (
                 <Redirect to='/log'></Redirect>
