@@ -8,21 +8,20 @@ import Button from 'react-bootstrap/Button';
 class Log extends Component {
     handleSubmit = (e) => {
         e.preventDefault();
-        // const selectedIndex = e.target.select.options.selectedIndex;
-        // const options = e.target.select.options;
-        // console.log(e.target.select.options)
-        // const newAuthedUserId = options[selectedIndex].value;
-        console.log(this.username)
-        //this.props.dispatch(setAuthedUser(this.myOption.value))
+        // const allOptions = document.querySelectorAll('.custom-select.custom-select')[0].options;
+        // const selectedIndex = allOptions.selectedIndex;
+        // const id = allOptions[selectedIndex].value;
+        // console.log(id)
+        this.props.dispatch(setAuthedUser(null))
     };
 
-    onChange = (e) => {
+    onChange = (e, authedUser) => {
         e.preventDefault();
         this.props.dispatch(setAuthedUser(this.username.value))
     }
 
     render() {
-        const { users, authedUser } = this.props;
+        const { users } = this.props;
         
         return (
             <Form onSubmit={this.handleSubmit}>
@@ -37,23 +36,23 @@ class Log extends Component {
                     <Form.Label>
                         <h4>Sign in</h4>
                     </Form.Label>
-                    <Form.Control as="select" size="lg"
+                    <Form.Control 
+                     as="select" 
+                     size="lg"
                      custom 
-                     onChange={this.onChange}
-                     ref={ele => this.username = ele}>  
+                     onChange={(e) => this.onChange(e, this.props.authedUser)}
+                     ref={ele => this.username = ele}>
+                    <option disabled selected>Select User</option>
                         {
                             users.map(user => (
-                                <option
-                                    key={user.id}
-                                    defaultValue={user.id === authedUser}
-                                    value={user.id}    
-                                >
+                                <option key={user.id} value={user.id}>
                                     {user.name}
                                 </option>
                             ))
                         }
                     </Form.Control>
                 </Form.Group>
+                <Button type='submit'>Log Out</Button>
             </Form>
         )
     }
