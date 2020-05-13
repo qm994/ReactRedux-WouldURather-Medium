@@ -22,7 +22,7 @@ export default function users(state = {}, action) {
                 }
             };
         case ADD_POLL_USER:
-          const {id, author, optionOne, optionTwo, timestamp } = action.newPoll;
+          const {id, author } = action.newPoll;
           console.log(action)
           return {
             ...state,

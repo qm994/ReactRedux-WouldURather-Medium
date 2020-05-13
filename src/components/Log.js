@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { setAuthedUser } from '../actions/authedUser';
 import { divStyle } from '../utils/helper';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+
+import { Route, Redirect } from 'react-router-dom';
 
 
 export const fakeAuth = {

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import ReactDOM from 'react-dom';
 import { Redirect } from 'react-router-dom';
 
 import Image from 'react-bootstrap/Image';
@@ -10,8 +8,6 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Form from 'react-bootstrap/Form';
 import Badge from 'react-bootstrap/Badge';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Popover from 'react-bootstrap/Popover';
 
 import { getFixedNumber } from '../utils/helper';
 import { handleAddAnswer } from '../actions/shared';
