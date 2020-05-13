@@ -3,15 +3,11 @@ import { connect } from "react-redux";
 
 import HomeAnswered from './HomeAnswered';
 import HomeUnAnswered from './HomeUnswered';
-import { getVoters } from '../utils/helper';
 
 import Tab from 'react-bootstrap/Tab';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Nav from 'react-bootstrap/Nav';
-import { Redirect } from 'react-router-dom';
-
-
 
 class Home extends Component {
     render() {

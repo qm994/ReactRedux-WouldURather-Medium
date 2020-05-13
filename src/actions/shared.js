@@ -1,6 +1,5 @@
 import { receivePolls, savePollAnswer, addNewPoll } from './polls';
 import { receiveUsers, saveUserAnswer, addNewPollUser } from './users';
-import { setAuthedUser } from './authedUser';
 import { _getUsers, _getQuestions, _saveQuestionAnswer, _saveQuestion } from '../utils/_DATA';
 
 // const DEFAULT_AUTHED_ID = "sarahedo";

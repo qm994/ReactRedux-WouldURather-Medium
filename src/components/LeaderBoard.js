@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from 'react-bootstrap/Card';
-import Image from 'react-bootstrap/Image';
-import Figure from 'react-bootstrap/Figure';
 import FigureImage from 'react-bootstrap/FigureImage';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
-import { Redirect } from 'react-router-dom';
+
 import "../css/index.css";
 class LeaderBoard extends Component {
 
@@ -35,7 +33,7 @@ class LeaderBoard extends Component {
                             />
                             <div className="leader">
                                 <Card.Text as="h5">
-                                    Answerd Questions: <span>{data.answered}</span>
+                                    Answered Questions: <span>{data.answered}</span>
                                 </Card.Text>
                                 <Card.Text as="h5">
                                     Created Questions: <span>{data.created}</span>
