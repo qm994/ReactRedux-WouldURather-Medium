@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -52,12 +52,15 @@ class PollDetail extends Component {
     render() {
         const { id, polls, users, authedUser } = this.props;
         const userHasAnswered = Object.keys(users[authedUser].answers);
-        if(polls[id] === undefined) {
-            return(
+        if (polls[id] === undefined) {
+            return (
                 <Redirect to="/404" />
             )
         };
         const pollInfo = polls[id];
+        console.log(pollInfo)
+        console.log(pollInfo.optionOne.votes.length)
+        console.log(pollInfo.optionTwo.votes.length)
         const authorId = pollInfo.author;
         const authorInfo = users[authorId];
         const optionOneVotes = getFixedNumber(pollInfo.optionOne);
@@ -74,6 +77,7 @@ class PollDetail extends Component {
                             <h3>Results:</h3>
                         </Card.Subtitle>
                         {
+                            // set the badge for optionOne
                             userSelection === "optionOne"
                                 ? <div>
                                     <div>
@@ -82,28 +86,51 @@ class PollDetail extends Component {
                                             <Badge pill variant="success">Your Vote!</Badge>
                                         </Card.Text>
                                         <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
-                                        <Card.Header as="h5">{pollInfo.optionOne.votes.length} out of 3 votes</Card.Header>
+                                        <Card.Header as="h5">
+                                            {pollInfo.optionOne.votes.length}
+                                            out of
+                                            {pollInfo.optionOne.votes.length + pollInfo.optionTwo.votes.length} votes
+                                        </Card.Header>
                                     </div>
-                                    <br/>
+                                    <br />
                                     <div>
                                         <Card.Text>
                                             <strong>{pollInfo.optionTwo.text}</strong>
                                         </Card.Text>
                                         <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
-                                        <Card.Header as="h5">{pollInfo.optionTwo.votes.length} out of 3 votes</Card.Header>
+                                        <Card.Header as="h5">
+                                            {pollInfo.optionTwo.votes.length}
+                                            out of
+                                            {pollInfo.optionOne.votes.length + pollInfo.optionTwo.votes.length} votes
+                                            </Card.Header>
                                     </div>
                                 </div>
-
+                                // set badge for optionTwo
                                 : <div>
-                                    <Card.Text>
-                                        <strong>{pollInfo.optionOne.text}</strong>
-                                    </Card.Text>
-                                    <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
-                                    <Card.Text>
-                                        <strong>{pollInfo.optionTwo.text}</strong>
-                                        <Badge pill variant="success">Your Vote!</Badge>
-                                    </Card.Text>
-                                    <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                                    <div>
+                                        <Card.Text>
+                                            <strong>{pollInfo.optionOne.text}</strong>
+                                        </Card.Text>
+                                        <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
+                                        <Card.Header as="h5">
+                                            {pollInfo.optionOne.votes.length}
+                                            out of
+                                            {pollInfo.optionOne.votes.length + pollInfo.optionTwo.votes.length} votes
+                                    </Card.Header>
+                                    </div>
+                                    <br />
+                                    <div>
+                                        <Card.Text>
+                                            <strong>{pollInfo.optionTwo.text}</strong>
+                                            <Badge pill variant="success">Your Vote!</Badge>
+                                        </Card.Text>
+                                        <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
+                                        <Card.Header as="h5">
+                                            {pollInfo.optionTwo.votes.length}
+                                            out of
+                                            {pollInfo.optionOne.votes.length + pollInfo.optionTwo.votes.length} votes
+                                    </Card.Header>
+                                    </div>
                                 </div>
                         }
 
