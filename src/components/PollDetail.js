@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
-
+import { connect } from 'react-redux';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -58,6 +58,7 @@ class PollDetail extends Component {
             )
         };
         const pollInfo = polls[id];
+        console.log(pollInfo)
         const authorId = pollInfo.author;
         const authorInfo = users[authorId];
         const optionOneVotes = getFixedNumber(pollInfo.optionOne);
@@ -82,7 +83,11 @@ class PollDetail extends Component {
                                             <Badge pill variant="success">Your Vote!</Badge>
                                         </Card.Text>
                                         <ProgressBar animated now={optionOneVotes} label={`${optionOneVotes}%`} />
-                                        <Card.Header as="h5">{pollInfo.optionOne.votes.length} out of 3 votes</Card.Header>
+                                        <Card.Header as="h5">
+                                            {pollInfo.optionOne.votes.length} 
+                                            out of 
+                                            {pollInfo.optionOne.votes.length + pollInfo.optionTwo.votes.length} votes
+                                            </Card.Header>
                                     </div>
                                     <br/>
                                     <div>
@@ -90,7 +95,11 @@ class PollDetail extends Component {
                                             <strong>{pollInfo.optionTwo.text}</strong>
                                         </Card.Text>
                                         <ProgressBar animated now={optionTwoVotes} label={`${optionTwoVotes}%`} />
-                                        <Card.Header as="h5">{pollInfo.optionTwo.votes.length} out of 3 votes</Card.Header>
+                                        <Card.Header as="h5">
+                                            {pollInfo.optionTwo.votes.length} 
+                                            out of 
+                                            {pollInfo.optionOne.votes.length + pollInfo.optionTwo.votes.length} votes
+                                            </Card.Header>
                                     </div>
                                 </div>
 
